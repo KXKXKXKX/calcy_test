@@ -98,8 +98,13 @@ def reihe_fibonacci (): #Fibonacci Reihe entwicklen
         print("Das Intervallende wurde auf 2 gesetzt!")
         intervallende=2
         
-#    if entwickungspunkt>
-#       
+    if entwicklungspunkt>intervallende: #Entwicklungspunkt muss im Intervall liegen
+        print("Der Entwicklungspunkt liegt nach dem Intervallende!")
+        print("Die Punkte werden daher vertauscht!")
+        changer=intervallende
+        intervallende=entwicklungspunkt
+        entwicklungspunkt=changer
+       
 #    if entwicklungspunkt==1:
 #        nextpoint=2
 #
