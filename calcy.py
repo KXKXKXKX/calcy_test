@@ -3,8 +3,8 @@
 """
 Created on Mon Nov 28 11:51:55 2016
 
-@author: markus
-@version: 0.1.1
+@author: m
+@version: 0.1.2
 
 """
 
@@ -13,47 +13,50 @@ from math import sqrt
 
 calcy_menu = 1 #Variable, used for branching in the menu
 
-#Reads two floats and return their values
-def get2floats ():
+
+def get2floats (): #Reads two floats and return their values
+
     float1 = float(input("Bitte Zahl 1 eingeben: "))
     print("Es wurde "+str(float1)+" eingegeben!\n")
     float2 = float(input("Bitte Zahl 2 eingeben: "))
     print("Es wurde "+str(float2)+" eingegeben!\n")
     return float1, float2
 
-#Adds two variables of any kind, including strings
-def add (a, b):
+
+def add (a, b): #Adds two variables of any kind, including strings
     return a+b
 
-#Subtrakt two variables of any kind except strings
-def sub (a, b):
+
+def sub (a, b): #Subtract two variables of any kind except strings
     return a-b
 
-#Multiple two variables
-def mult (a, b):
+
+def mult (a, b): #Multiple two variables
     return a*b
 
-#Divide two variables, catch 0 division
-def div (a, b):
+
+def div (a, b): #Divide two variables, catch 0 division
+
     if b==0:
         print("Division durch 0 nicht möglich!")
         return "Division durch 0"
     return a/b
 
-#Powers a with b
-def power (a, b):
-    return a**b
 
-#Quadratic solution
-def quadrat ():
-#Read values
+def power (a, b): #Powers a with b
+     return a**b
+
+
+def quadrat (): #Quadratic solution
+    
+    #Read values
     a = float(input("Bitte einen Wert für a eingeben (Darf nicht 0 sein!): "))
     b = float(input("Bitte einen Wert für b eingeben: "))
     c = float(input("Bitte einen Wert für c eingeben: "))
 
     print("\nEs wurden eingebenen: a="+str(a)+", b="+str(b)+" und c="+str(c)+"!")
 
-#calculate discriminante and handle the value
+    #calculate discriminante and handle the value
 
     discriminante = power(b, 2)-4*a*c
     print("Die Diskriminante ist: "+str(discriminante))
@@ -72,7 +75,9 @@ def quadrat ():
         print("Die Diskriminante ist 0 - es ist eine reele Lösung vorhanden:\n")
         return (div(-b, (2*a))), (None)
 
+        
 def reihe_quadrat (): #calculate quadratic series
+ 
     entwicklungspunkt = int(input("Bitte den Entwicklungspunkt eingeben: "))
     intervallende = int(input("Bitte das Intervallende eingeben: "))
     ergebnis = []
@@ -83,8 +88,10 @@ def reihe_quadrat (): #calculate quadratic series
     print("Das Ergbnis ist: ")
     print(ergebnis)
     return ergebnis
+ 
     
-def reihe_fibonacci (): #calculate Fibonacci series
+def reihe_fibonacci_logic (): #handles Fibonacci series logic
+
     entwicklungspunkt = int(input("Bitte den Entwicklungspunkt eingeben: "))
     intervallende = int(input("Bitte das Intervallende eingeben: "))
     
@@ -104,26 +111,59 @@ def reihe_fibonacci (): #calculate Fibonacci series
         changer = intervallende
         intervallende = entwicklungspunkt
         entwicklungspunkt = changer
-       
-#    if entwicklungspunkt==1:
-#        nextpoint=2
-#
-#    while nexpoint<=intervallende:
+    
+    #starting condition
+    firstpoint = 1
+    nextpoint = 2
         
-    
-    
-def reihe_summe (ergebnis): #calculates the sum of serie
-    summe = 0
-    for i in range(0, len(ergebnis)):
-        summe = summe+ergebnis[i]
-    print("Die Summe der Reihe ist: "+str(summe))
+    reference = reihe_fibonacci_calc(firstpoint, nextpoint, intervallende) #calculate the reference serie till the intervallende
 
+    i = 0
+    while reference[i]<entwicklungspunkt: #find start in the reference
+        i += 1
+            
+    reference = reference [i::]
+    return reference
+
+   
+def reihe_fibonacci_calc (first, second, end): #calculate the fibonacci serie, need a valid start (first, second)
+
+    ergebnis = []
+    ergebnis.append(first)
+    i = 0
+    newelement = second
+    
+    while newelement<=end: #check if the end is reached, if then break the loop
+        ergebnis.append(newelement)
+        newelement = ergebnis[i] + ergebnis[i+1]
+        i += 1
+    
+    return ergebnis
+    
+        
+def reihe_summe (ergebnis): #calculates the sum of serie
+    
+    print("Wollen Sie die Summe der Reihe berechnen? Ja (1) Nein (2)")
+    menu = int(input("Bitte eine Eingabe tätigen: "))
+    
+    if menu==1:
+        summe = 0
+        for i in range(0, len(ergebnis)):
+            summe = summe+ergebnis[i]
+        print("Die Summe der Reihe ist: "+str(summe))
+        
+    elif menu==2:
+        print("Die Summe der Reihe wird nicht berechnet.")
+        
+    else:
+        print("Es wurde keine gültige Auswahl getroffen! Die Summe wird daher nicht berechnet!")
+    
 
 while calcy_menu>0: #Loop of the menu
 
     print("\n\nWillkommen bei Calcy!\n")
     print("Bitte waehlen Sie eine Rechenoperation aus dem Menü:\n")
-    print("----------Menue----------")
+    print("----------Menü----------")
     print("Addition - 1")
     print("Subtraktion - 2")
     print("Multiplikation - 3")
@@ -135,8 +175,9 @@ while calcy_menu>0: #Loop of the menu
 
     # Quit Calcy
     print("Beenden - 0")
+    
 
-    calcy_menu = int(input("Bitte eine Eingabe taetigen: "))
+    calcy_menu = int(input("Bitte eine Eingabe tätigen: "))
     print ("Sie haben "+str(calcy_menu)+" gewählt!\n\n")
 
     if calcy_menu==1: #Addition
@@ -183,25 +224,29 @@ while calcy_menu>0: #Loop of the menu
 
         if calcy_menu==1: #Quadratic serie
             print("Sie haben die Entwicklung der quadratischen Reihe gewählt!")
-            ergebnis=reihe_quadrat()
-            
-            print("Wollen Sie die Summe der Reihe berechnen? Ja (1) Nein (2)")
-            calcy_menu = int(input("Bitte eine Eingabe tätigen: "))
-            
-            if calcy_menu==1:
-                reihe_summe(ergebnis)
-            elif calcy_menu==2:
-                print("Die Summe der Reihe wird nicht berechnet.")
-            else:
-                print("Es wurde keine gültige Auswahl getroffen!")
+            ergebnis = reihe_quadrat()
+            print("Die quadratische Reihe ist: ")
+            print(ergebnis)
+            reihe_summe(ergebnis)
         
-        if calcy_menu==2:
+        elif calcy_menu==2:
             print("Sie haben die Entwicklung der Fibonacci Reihe gewählt!")
-            
+            ergebnis = reihe_fibonacci_logic()
+            print("Die Fibonacci Reihe ist: ")
+            print(ergebnis)
+            reihe_summe(ergebnis)
         
+        elif calcy_menu==0: #return to the main menu
+            print("Rückkehr zum Hauptmenü...")
+            calcy_menu = 8
         
         else: #No valid choice in the submenu
             print("Es wurde keine gültige Auswahl getroffen!")
+            calcy_menu = 8 #reset back to the series value
+            
+    elif calcy_menu==9: #testing
+        ergebnis = reihe_fibonacci_calc(1,2,100)
+        print(ergebnis)
 
     else: #No valid choice in the menu
         if calcy_menu!=0:
@@ -209,6 +254,4 @@ while calcy_menu>0: #Loop of the menu
 
 
 
-        
-        
-        
+exit(1) #terminate programm
