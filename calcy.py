@@ -4,7 +4,7 @@
 Created on Mon Nov 28 11:51:55 2016
 
 @author: m
-@version: 0.1.3
+@version: 0.1.4
 
 """
 
@@ -178,6 +178,48 @@ def reihe_summe (ergebnis): #calculates the sum of serie
         
     else:
         print("Es wurde keine gültige Auswahl getroffen! Die Summe wird daher nicht berechnet!")
+        
+
+def reihe_colatz_problem ():
+    
+    value = -1 #start value
+    ergebnis = []
+    while value<=0:
+        value = int(input("Bitte die Zahl eigeben von welcher die Fakultät berechnet werden soll: "))
+        if value<=0:
+            print("Die Zahl muss größer 0 sein!")
+            print("Bitte erneut eine Zahl eingeben!")
+            
+    maxvalues = 0 #how many values will be calculated
+    while maxvalues<=0:
+        maxvalues = int(input("Wie viele Werte sollen berechnet werden? (Achtung! Nicht mehr als 1000 empfohlen!)\n"))
+        if maxvalues<=0:
+            print("Die Zahl muss größer 0 sein!")
+            print("Bitte erneut eine Zahl eingeben!")
+            
+    for i in range(0, maxvalues):
+        ergebnis.append(value)
+                
+        if (value%2)==0: #even
+            value//=2
+        else: #odd
+            value = value*3+1
+            
+        #check if konvergent
+        
+        if value==1:
+            if ergebnis[len(ergebnis)-1]==2:
+                if ergebnis[len(ergebnis)-2]==4:
+                    ergebnis.append(value)
+                    break
+                    
+                    
+    print("\nEs wurden "+str(len(ergebnis))+" Werte berechnet:")
+    if len(ergebnis)==maxvalues:
+        print("Achtung es wurde nach Erreichen von "+str(maxvalues)+" Werten abgebrochen!")
+    
+    return ergebnis
+    
     
 
 while calcy_menu>0: #Loop of the menu
@@ -239,6 +281,7 @@ while calcy_menu>0: #Loop of the menu
         print("-----Reihe entwickeln-----")
         print("Quadratische Reihe - 1")
         print("Fibonacci Reihe - 2")
+        print("Colatz Problem - 3")
 
         #Quit submenu
         print("Beenden des Reihenmenüs - 0")
@@ -259,6 +302,11 @@ while calcy_menu>0: #Loop of the menu
             print("Die Fibonacci Reihe ist: ")
             print(ergebnis)
             reihe_summe(ergebnis)
+            
+        elif calcy_menu==3:
+            print("Sie haben das Colatz Problem gewählt!")
+            ergebnis = reihe_colatz_problem()
+            print(ergebnis)
         
         elif calcy_menu==0: #return to the main menu
             print("Rückkehr zum Hauptmenü...")
@@ -269,8 +317,9 @@ while calcy_menu>0: #Loop of the menu
             calcy_menu = 8 #reset back to the series value
             
     elif calcy_menu==9: #testing
-        ergebnis = reihe_fibonacci_calc(1,2,100)
-        print(ergebnis)
+       print("Test Funktion")
+
+    #edit
 
     else: #No valid choice in the menu
         if calcy_menu!=0:
