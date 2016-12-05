@@ -4,7 +4,7 @@
 Created on Mon Nov 28 11:51:55 2016
 
 @author: m
-@version: 0.1.2
+@version: 0.1.3
 
 """
 
@@ -47,6 +47,27 @@ def power (a, b): #Powers a with b
      return a**b
 
 
+def factorial_logic (): #logic for caluclating the factorial of an integer
+    
+    value = -1
+    while value<0:
+        value = int(input("Bitte die Zahl eigeben von welcher die Fakultät berechnet werden soll: "))
+        if value<0:
+            print("Die Zahl muss größer oder gleich 0 sein!")
+            print("Bitte erneut eine Zahl eingeben!")
+            
+    return factorial(value)
+    
+    
+def factorial (a): #calculate the factorial of an integer recursiv
+    
+    if a==0:
+        return 1
+    else:
+        return factorial(a-1)*a
+     
+     
+     
 def quadrat (): #Quadratic solution
     
     #Read values
@@ -170,7 +191,7 @@ while calcy_menu>0: #Loop of the menu
     print("Division - 4")
     print("Potenz - 5")
     print("Quadratische Loesung - 6")
-    print("Caro Funktion - 7")
+    print("Fakultät - 7")
     print("Reihe entwickeln - 8")
 
     # Quit Calcy
@@ -208,8 +229,11 @@ while calcy_menu>0: #Loop of the menu
             print(a)
             print(b)
 
-    elif calcy_menu==7: #Caro
-        print("Ich liebe Dich Caro!\nDein Markus")
+    elif calcy_menu==7: #Factorial
+        ergebnis = factorial_logic()
+        print("Das Ergebnis ist: ")
+        print(ergebnis)
+        
 
     elif calcy_menu==8: #Calculate series
         print("-----Reihe entwickeln-----")
