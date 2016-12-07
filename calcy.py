@@ -4,7 +4,7 @@
 Created on Mon Nov 28 11:51:55 2016
 
 @author: m
-@version: 0.1.4
+@version: 0.1.4.1
 
 """
 
@@ -185,7 +185,7 @@ def reihe_colatz_problem ():
     value = -1 #start value
     ergebnis = []
     while value<=0:
-        value = int(input("Bitte die Zahl eigeben von welcher die Fakultät berechnet werden soll: "))
+        value = int(input("Bitte die Zahl eigeben von welcher das Colatz Problem entwickelt werden soll: "))
         if value<=0:
             print("Die Zahl muss größer 0 sein!")
             print("Bitte erneut eine Zahl eingeben!")
