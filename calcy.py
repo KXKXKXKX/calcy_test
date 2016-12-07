@@ -3,10 +3,10 @@
 """
 Created on Mon Nov 28 11:51:55 2016
 
-@author: m
-@version: 0.1.5.1
+@author: m, m@arkus.at
+@version: 0.1.6
 
-A mighty Calculator for different problems
+A mighty calculator for different problems
 Markus Spreitzer, 12226888, 31.10.2016
 
 
@@ -15,7 +15,7 @@ Markus Spreitzer, 12226888, 31.10.2016
 
 from math import sqrt
 #import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 def main ():
@@ -230,6 +230,24 @@ def main ():
         
         return ergebnis
         
+    def print_graph (title, reihe):
+        
+        print("Wollen Sie die Reihe plotten? Ja (1) Nein (2)")
+        menu = int(input("Bitte eine Eingabe tätigen: "))
+        
+        if menu==1:
+            print("Achtung die Skalierung wird logarithmisch dargestellt!")
+            plt.title(title)
+            plt.plot(reihe, "r+-")
+            plt.xlabel("X-Achse")
+            plt.ylabel("Y-Achse")
+            plt.show()
+            
+        elif menu==2:
+            print("Die Reihe wird nicht geplottet.")
+            
+        else:
+            print("Es wurde keine gültige Auswahl getroffen! Die Reihe wird daher nicht geplottet!")
         
     
     while calcy_menu>0: #Loop of the menu
@@ -305,6 +323,7 @@ def main ():
                 print("Die quadratische Reihe ist: ")
                 print(ergebnis)
                 reihe_summe(ergebnis)
+                print_graph("Quadratische Reihe", ergebnis)
             
             elif calcy_menu==2:
                 print("Sie haben die Entwicklung der Fibonacci Reihe gewählt!")
@@ -312,11 +331,14 @@ def main ():
                 print("Die Fibonacci Reihe ist: ")
                 print(ergebnis)
                 reihe_summe(ergebnis)
+                print_graph("Fibonacci Reihe", ergebnis)
                 
             elif calcy_menu==3:
                 print("Sie haben das Colatz Problem gewählt!")
                 ergebnis = reihe_colatz_problem()
                 print(ergebnis)
+                reihe_summe(ergebnis)
+                print_graph("Colatz Werte", ergebnis)
             
             elif calcy_menu==0: #return to the main menu
                 print("Rückkehr zum Hauptmenü...")
@@ -327,7 +349,7 @@ def main ():
                 calcy_menu = 8 #reset back to the series value
                 
         elif calcy_menu==9: #testing
-           print("Test Funktion")
+            print("Test")
     
         #edit
     
