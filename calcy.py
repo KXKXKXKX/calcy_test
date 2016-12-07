@@ -4,7 +4,7 @@
 Created on Mon Nov 28 11:51:55 2016
 
 @author: m
-@version: 0.1.4.1
+@version: 0.1.5.1
 
 A mighty Calculator for different problems
 Markus Spreitzer, 12226888, 31.10.2016
