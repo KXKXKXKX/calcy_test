@@ -6,7 +6,7 @@ Created on Mon Nov 28 11:51:55 2016
 @author: m, m@arkus.at
 @version: 0.1.6
 
-A mighty calculator for different problems
+A mighty calculator for different problems, Testcoding for getting practice with GIT
 Markus Spreitzer, 12226888, 31.10.2016
 
 
