@@ -4,7 +4,7 @@
 First Version created on Mon Nov 28 11:51:55 2016
 
 @author: m, m@arkus.at
-@version: 0.1.8
+@version: 0.1.8.1
 
 A mighty calculator for different problems, Testcoding for getting practice with GIT
 Markus Spreitzer, 09.01.2017
@@ -229,7 +229,7 @@ def main ():
         return ergebnis
         
         
-    def reihe_prime ():
+    def reihe_prime (enable=0, value=-1):
         
         ergebnis = []
         
@@ -239,12 +239,15 @@ def main ():
         
         counter = 3
         
-        value = -1 #start value, bigger than 1
-        while value<=0:
-            value = int(input("Bitte die Zahl eigeben bis zu welcher Primzahlen entwickelt werden sollen: "))
-            if value<=0:
-                print("Die Zahl muss größer 0 sein!")
-                print("Bitte erneut eine Zahl eingeben!")
+        if enable==0: #if enable is 0, normal mode -> prime series, if not -> prime tester mode
+        
+            value = -1 #start value, bigger than 1
+            while value<=0:
+                value = int(input("Bitte die Zahl eingeben bis zu welcher Primzahlen entwickelt werden sollen: "))
+                if value<=0:
+                    print("Die Zahl muss größer 0 sein!")
+                    print("Bitte erneut eine Zahl eingeben!")
+            
             
         if value==1:
             return ergebnis
@@ -270,6 +273,29 @@ def main ():
         ergebnis.pop() #removes last element to be in range, it has to develop one element more than requested to make sure that the previous was the last one
             
         return ergebnis
+        
+    def reihe_prime_tester ():
+        
+        value = -1 #start value, bigger than 1
+        while value<=0:
+            value = int(input("Bitte die Zahl eingeben welche getestet werden soll: "))
+            if value<=0:
+                print("Die Zahl muss größer 0 sein!")
+                print("Bitte erneut eine Zahl eingeben!")
+                
+        if value == 1:
+            print("1 ist eine Primzahl per Definition!")
+            return True
+            
+        else:
+            primes = []
+            primes = reihe_prime(1, value)
+            for i in primes:
+                if (i==value):
+                    print(str(value)+" ist eine Primzahl!")
+                    return True
+            print(str(value)+" ist KEINE Primzahl!")
+            return False
         
     def print_graph (title, reihe):
         
@@ -352,6 +378,7 @@ def main ():
             print("Fibonacci Reihe - 2")
             print("Colatz Problem - 3")
             print("Primzahlenreihe entwickeln - 4")
+            print("Einzelne Zahl auf Primzahl untersuchen - 5")
     
             #Quit submenu
             print("Beenden des Reihenmenüs - 0")
@@ -388,6 +415,10 @@ def main ():
                 print(ergebnis)
                 reihe_summe(ergebnis)
                 print_graph("Primzahlen", ergebnis)
+                
+            elif calcy_menu==5: #prime tester
+                print("Sie haben den Primzahltester gewählt!")
+                reihe_prime_tester()
             
             elif calcy_menu==0: #return to the main menu
                 print("Rückkehr zum Hauptmenü...")
