@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov 28 11:51:55 2016
+First Version created on Mon Nov 28 11:51:55 2016
 
 @author: m, m@arkus.at
-@version: 0.1.6
+@version: 0.1.8
 
 A mighty calculator for different problems, Testcoding for getting practice with GIT
-Markus Spreitzer, 12226888, 31.10.2016
-
-
+Markus Spreitzer, 09.01.2017
 """
 
 
@@ -230,6 +228,49 @@ def main ():
         
         return ergebnis
         
+        
+    def reihe_prime ():
+        
+        ergebnis = []
+        
+        #add definition of prime
+        
+        ergebnis.append(1)
+        
+        counter = 3
+        
+        value = -1 #start value, bigger than 1
+        while value<=0:
+            value = int(input("Bitte die Zahl eigeben bis zu welcher Primzahlen entwickelt werden sollen: "))
+            if value<=0:
+                print("Die Zahl muss größer 0 sein!")
+                print("Bitte erneut eine Zahl eingeben!")
+            
+        if value==1:
+            return ergebnis
+        else:
+            ergebnis.append(2)
+            
+        trigger = 0
+            
+        while (value>=ergebnis[len(ergebnis)-1]): #first loop, breaks if the primes runs out of range
+            
+            for i in ergebnis: #second loop breaks, if prime is found
+                
+                if((counter%i==0) and not (i is ergebnis[0])):
+                    trigger = 1 #shortcut if not prime, it breaks at first division with remainer 0
+                    break
+                
+            if (trigger == 0): #prime is found, writing to array
+                ergebnis.append(counter)
+            else:
+                trigger = 0
+            counter += 1
+        
+        ergebnis.pop() #removes last element to be in range, it has to develop one element more than requested to make sure that the previous was the last one
+            
+        return ergebnis
+        
     def print_graph (title, reihe):
         
         print("Wollen Sie die Reihe plotten? Ja (1) Nein (2)")
@@ -310,6 +351,7 @@ def main ():
             print("Quadratische Reihe - 1")
             print("Fibonacci Reihe - 2")
             print("Colatz Problem - 3")
+            print("Primzahlenreihe entwickeln - 4")
     
             #Quit submenu
             print("Beenden des Reihenmenüs - 0")
@@ -325,7 +367,7 @@ def main ():
                 reihe_summe(ergebnis)
                 print_graph("Quadratische Reihe", ergebnis)
             
-            elif calcy_menu==2:
+            elif calcy_menu==2: #fibonacci series
                 print("Sie haben die Entwicklung der Fibonacci Reihe gewählt!")
                 ergebnis = reihe_fibonacci_logic()
                 print("Die Fibonacci Reihe ist: ")
@@ -333,12 +375,19 @@ def main ():
                 reihe_summe(ergebnis)
                 print_graph("Fibonacci Reihe", ergebnis)
                 
-            elif calcy_menu==3:
+            elif calcy_menu==3: #callatz series
                 print("Sie haben das Colatz Problem gewählt!")
                 ergebnis = reihe_colatz_problem()
                 print(ergebnis)
                 reihe_summe(ergebnis)
                 print_graph("Colatz Werte", ergebnis)
+                
+            elif calcy_menu==4: #prime series
+                print("Sie haben die Primzahlenreihe gewählt!")
+                ergebnis = reihe_prime()
+                print(ergebnis)
+                reihe_summe(ergebnis)
+                print_graph("Primzahlen", ergebnis)
             
             elif calcy_menu==0: #return to the main menu
                 print("Rückkehr zum Hauptmenü...")
